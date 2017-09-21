@@ -97,7 +97,7 @@ function FileStitcher(pathName)
 {
 	//make new object of file type
 	f = new Folder(pathName);
-	fToWriteTo = new File("TestTextForJavascript.txt");
+	fToWriteTo = new File("D:\Github-Desktop\GlslStitcherJavascriptMaxMsp\Javascript File\TestTextForJavascript.txt");
 	//f.typelist = ["TEXT"];//defines file type
 	
 	//is an int which is the amount of files in the folder
