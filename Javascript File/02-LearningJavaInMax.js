@@ -92,3 +92,39 @@ function Readlines(s)
 		post("could not open file: " + s + "\n");
 	}
 }
+
+function FileStitcher(pathName)
+{
+	//make new object of file type
+	f = new Folder(pathName);
+	fToWriteTo = new File("TestTextForJavascript.txt");
+	//f.typelist = ["TEXT"];//defines file type
+	
+	//is an int which is the amount of files in the folder
+	fileAmount = f.count;
+
+	//this prints out all the names of the files in the folder
+	while (!f.end) 
+	{
+	//Print file name to the max console
+    post(f.filename);
+
+	//reads all Lines from text file, needs to go into array
+	currentLine = Readlines(f.pathname+f.filename);
+	fToWriteTo.writeline(currentLine);
+    //Create empty line
+	post();
+	
+	//Go to next file.
+    f.next();
+
+ 	//or make new .JXS file here, then just try to write very line to the 	
+	//new file
+	
+ 	
+	}
+  	
+  	post ("the amount of files in the folder is " + fileAmount);
+  	outlet(0,"the amount of files in the folder is " + fileAmount);
+		
+}
