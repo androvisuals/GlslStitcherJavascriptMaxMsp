@@ -58,3 +58,37 @@ function FolderFileAmount (pathName)
   outlet(0,"the amount of files in the folder is " + fileAmount);
 
 }
+
+function Readfile(s)
+{
+	var f = new File(s);
+	var i,a,c;
+
+	if (f.isopen) {
+		c = f.eof;
+		for (i=0;i<c;i++) {
+			a = f.readchars(1); //returns an array of single character strings
+			post("char at fileposition[" + f.position + "]: " + a + "\n");
+		}
+		f.close();
+	} else {
+		post("could not open file: " + s + "\n");
+	}
+}
+
+function Readlines(s)
+{
+	var f = new File(s);
+	var i,a,c;
+
+	if (f.isopen) {
+		i=0;
+		while ((a = f.readline()) != null) { // returns a string
+			post("line[" + i + "]: " + a + "\n");
+			i++;
+		}
+		f.close();
+	} else {
+		post("could not open file: " + s + "\n");
+	}
+}
