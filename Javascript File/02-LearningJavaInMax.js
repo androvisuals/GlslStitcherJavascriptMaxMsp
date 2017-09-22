@@ -2,6 +2,8 @@ autowatch = 1;
 
 inlets =2;
 outlets = 2;
+
+var mergedFilePath = jsarguments[1];
 //this listens for a function called foo and posts a b c to the max console
 function foo (a,b,c)
 {
@@ -66,6 +68,7 @@ function WriteFile(s)
 	if (f.isopen) {
 		post("writing string to file: " + s2 + "\n");
 		f.writestring(s2); //writes a string
+		//f.writeLine();
 		f.close();
 	} else {
 		post("could not create file: " + s + "\n");
@@ -110,33 +113,28 @@ function FileStitcher(pathName)
 {
 	//make new object of file type
 	f = new Folder(pathName);
-	fToWriteTo = new File("TestTextForJavascript.txt","write");
+	fToWriteTo = new File("C:/Users/Andro/Desktop/TestText.txt","write");
+	
+	//WriteFile(mergedFilePath);
 	//f.typelist = ["TEXT"];//defines file type
-	if(fToWriteTo.isopen == true)
-	{
-			post("file to write to is open");
-			
-	}
-	if (fToWriteTo.isopen == false)
-	{
-		post("file is closed");
-	}
-	//is an int which is the amount of files in the folder
-	fileAmount = f.count;
 
+	//is an int which is the amount of files in the folder
+	fileAmount = f.count+1;
+	
 	//this prints out all the names of the files in the folder
-	while (!f.end) 
+	for (var i = 0; i < fileAmount; i++) 
 	{
 	//Print file name to the max console
     post(f.filename);
 
 	//reads all Lines from text file, needs to go into array
-	currentLine = Readlines(f.pathname+f.filename);
-	fToWriteTo.writestring(currentLine);
+	//currentLine = Readlines(f.pathname+f.filename);
+	//fToWriteTo.writestring(currentLine);
     //Create empty line
-	counter = 1;
-	counter +=1;
+	
+	counter = i;
 	post("counter test is " + counter);
+	
 	post();
 	post();
 	
@@ -148,6 +146,7 @@ function FileStitcher(pathName)
 	
  	
 	}
+	
 	fToWriteTo.close();
   	
   	post ("the amount of files in the folder is " + fileAmount);
