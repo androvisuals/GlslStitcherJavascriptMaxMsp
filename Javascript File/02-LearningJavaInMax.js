@@ -60,14 +60,15 @@ function FolderFileAmount (pathName)
   outlet(0,"the amount of files in the folder is " + fileAmount);
 
 }
-function WriteFile(s)
+function WriteFile(s2)
 {
-	var f = new File(s,"write","TEXT"); 
-	var s2 = "I am a file named " + f.filename + ", located in " + f.foldername;
+	var f = new File("C:/Users/Andro/Desktop/TestText.txt","write","TEXT"); 
+	//var s2 = "I am a file named " + f.filename + ", located in " + f.foldername;
 
 	if (f.isopen) {
-		post("writing string to file: " + s2 + "\n");
-		f.writestring(s2); //writes a string
+		//post("writing string to file: " + s2 + "\n");
+		post(s2);
+		f.writeline(s2); //writes a string
 		//f.writeLine();
 		f.close();
 	} else {
@@ -75,7 +76,7 @@ function WriteFile(s)
 	}
 }
 
-function Readfile(s)
+function ReadFile(s)
 {
 	var f = new File(s);
 	var i,a,c;
@@ -100,6 +101,7 @@ function Readlines(s)
 	if (f.isopen) {
 		i=0;
 		while ((a = f.readline()) != null) { // returns a string
+			
 			post("line[" + i + "]: " + a + "\n");
 			i++;
 		}
@@ -113,7 +115,8 @@ function FileStitcher(pathName)
 {
 	//make new object of file type
 	f = new Folder(pathName);
-	fToWriteTo = new File("C:/Users/Andro/Desktop/TestText.txt","write");
+	//fToWriteTo = new File("C:/Users/Andro/Desktop/TestText.txt","write");
+	
 	
 	//WriteFile(mergedFilePath);
 	//f.typelist = ["TEXT"];//defines file type
@@ -124,12 +127,13 @@ function FileStitcher(pathName)
 	//this prints out all the names of the files in the folder
 	for (var i = 0; i < fileAmount; i++) 
 	{
+		post("file length is "  + f.eof); 
 	//Print file name to the max console
     post(f.filename);
 
 	//reads all Lines from text file, needs to go into array
-	//currentLine = Readlines(f.pathname+f.filename);
-	//fToWriteTo.writestring(currentLine);
+	//var currentLine = Readlines(f.pathname+f.filename);
+	ReadFile(f.pathname+f.filename);
     //Create empty line
 	
 	counter = i;
