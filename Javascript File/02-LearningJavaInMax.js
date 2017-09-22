@@ -58,6 +58,19 @@ function FolderFileAmount (pathName)
   outlet(0,"the amount of files in the folder is " + fileAmount);
 
 }
+function WriteFile(s)
+{
+	var f = new File(s,"write","TEXT"); 
+	var s2 = "I am a file named " + f.filename + ", located in " + f.foldername;
+
+	if (f.isopen) {
+		post("writing string to file: " + s2 + "\n");
+		f.writestring(s2); //writes a string
+		f.close();
+	} else {
+		post("could not create file: " + s + "\n");
+	}
+}
 
 function Readfile(s)
 {
@@ -97,9 +110,17 @@ function FileStitcher(pathName)
 {
 	//make new object of file type
 	f = new Folder(pathName);
-	fToWriteTo = new File("D:\Github-Desktop\GlslStitcherJavascriptMaxMsp\Javascript File\TestTextForJavascript.txt");
+	fToWriteTo = new File("TestTextForJavascript.txt","write");
 	//f.typelist = ["TEXT"];//defines file type
-	
+	if(fToWriteTo.isopen == true)
+	{
+			post("file to write to is open");
+			
+	}
+	if (fToWriteTo.isopen == false)
+	{
+		post("file is closed");
+	}
 	//is an int which is the amount of files in the folder
 	fileAmount = f.count;
 
@@ -111,8 +132,12 @@ function FileStitcher(pathName)
 
 	//reads all Lines from text file, needs to go into array
 	currentLine = Readlines(f.pathname+f.filename);
-	fToWriteTo.writeline(currentLine);
+	fToWriteTo.writestring(currentLine);
     //Create empty line
+	counter = 1;
+	counter +=1;
+	post("counter test is " + counter);
+	post();
 	post();
 	
 	//Go to next file.
@@ -123,6 +148,7 @@ function FileStitcher(pathName)
 	
  	
 	}
+	fToWriteTo.close();
   	
   	post ("the amount of files in the folder is " + fileAmount);
   	outlet(0,"the amount of files in the folder is " + fileAmount);
